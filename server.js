@@ -13,7 +13,22 @@ let dataObjects = [
 		info:'bije misie',
 	}
 ]; // Array to store the data objects received
-
+app.post('/api/data', (req, res) => {
+	const newData = req.body;
+  
+	// Check if the user profile exists
+	const userExists = dataObjects.some((obj) => obj.name === newData.name);
+  
+	if (userExists) {
+	  // User profile exists, perform the necessary actions
+	  // For example, you can navigate to the profile page
+	  res.status(200).json({ success: true, message: 'User profile exists' });
+	} else {
+	  // User profile doesn't exist, handle the appropriate error or display a message
+	  res.status(404).json({ success: false, message: 'User profile does not exist' });
+	}
+  });
+  
 app.post('/api/data', (req, res) => {
   const newData = req.body;
   dataObjects.push(newData);
